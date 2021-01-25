@@ -19,10 +19,10 @@ install:
 before_build:
 
 build_script:
-  - '%MSYS_SH% --login -c ". /etc/profile && cd $APPVEYOR_BUILD_FOLDER && pwd && tar czf openssl-$TEST.tar.gz -C /c/ OpenSSL-$TEST"'
+  - '%MSYS_SH% --login -c ". /etc/profile && cd $APPVEYOR_BUILD_FOLDER && ./test.sh'
 
-test_script:
-  - '%MSYS_SH% --login -c ". /etc/profile && cd /c/OpenSSL-$TEST && ls -lR"'
+#test_script:
+#  - '%MSYS_SH% --login -c ". /etc/profile && cd /c/OpenSSL-$TEST && ls -lR"'
 
 #---------------------------------#
 #      artifacts configuration    #
@@ -31,6 +31,5 @@ test_script:
 artifacts:
 
   # pushing a single file
-  - path: openssl-$TEST.tar.gz
-  - path: c:\OpenSSL-win32\
-  - path: c:\OpenSSL-win64\
+  - path: openssl-win32.tar.gz
+  - path: openssl-win64.tar.gz
