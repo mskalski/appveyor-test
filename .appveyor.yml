@@ -1,5 +1,3 @@
-clone_depth: 50
-
 image:
   #- Visual Studio 2015
   #- Visual Studio 2017
@@ -7,12 +5,10 @@ image:
 
 environment:
   global:
-    TZ: Europe/Zurich
+    TZ: Europe/Warsaw
   matrix:
     - arch: x86_64
       bits: 64
-    - arch: i686
-      bits: 32
 
 install:
   - set MSYS_SH=C:\msys64\usr\bin\sh.exe
@@ -27,3 +23,12 @@ build_script:
 
 test_script:
   - '%MSYS_SH% --login -c ". /etc/profile && cd /c && ls -lR"'
+
+#---------------------------------#
+#      artifacts configuration    #
+#---------------------------------#
+
+artifacts:
+
+  # pushing a single file
+  - path: openssl-$TEST.tar.gz
