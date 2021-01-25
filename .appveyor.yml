@@ -11,14 +11,16 @@ environment:
   matrix:
     - arch: x86_64
       bits: 64
-    # no 32-bit build as 32-bit msys is not installed
     - arch: i686
       bits: 32
 
 install:
-  - set MSYS_SH=C:\msys%BITS%\usr\bin\sh.exe
+  - set MSYS_SH=C:\msys64\usr\bin\sh.exe
   - set MSYSTEM=MINGW%BITS%
   - set TEST=win%BITS%
+
+# scripts to run before build
+before_build:
 
 build_script:
   - '%MSYS_SH% --login -c ". /etc/profile && cd $APPVEYOR_BUILD_FOLDER && pwd && tar czf openssl-$TEST.tar.gz -C /c/ OpenSSL-$TEST"'
